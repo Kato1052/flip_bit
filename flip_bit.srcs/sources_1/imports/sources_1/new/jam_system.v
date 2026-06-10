@@ -107,6 +107,14 @@ module jam_system (
         .tracking_active (w_is_tracking) // 同期ロック中信号
     );
 
+    bit_flipper u_flipper {
+        .clk(sys_clk),
+        .rst_n(sys_rst_n),
+        .dme_in(dme_rx_pin),
+        .enable(flip_enable),
+        .flipping_out(jam_pin)
+    }
+
     // =========================================================
     // 5. メインシーケンス制御ステートマシン
     // =========================================================
@@ -135,7 +143,7 @@ module jam_system (
                 end
 
                 // ------------------------------------------------
-                // ST_WAIT: 40ビット時間 (3.2us) の待機
+                // ST_WAIT: 40ビット時間 (3.2us) の待機し、ノードID1のTOまで待つ
                 // ------------------------------------------------
                 ST_WAIT: begin
                     if (counter == WAIT_CYCLES - 1) begin

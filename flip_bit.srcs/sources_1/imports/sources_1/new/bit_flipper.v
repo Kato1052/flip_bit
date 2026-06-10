@@ -24,6 +24,8 @@ module bit_flipper (
     input wire clk,          // システムクロック (125MHz)
     input wire rst_n,        // リセット信号 (Active Low)
     input wire dme_in,       // 差動マンチェスタ入力信号 (12.5MHz)
+    input wire enable,
+    output reg flipping_out
 );
 
 endmodule
