@@ -113,7 +113,7 @@ module jam_system (
         .dme_in(dme_rx_pin),
         .enable(flip_enable),
         .flipping_out(jam_pin)
-    }
+    };
 
     // =========================================================
     // 5. メインシーケンス制御ステートマシン
@@ -193,19 +193,20 @@ module jam_system (
                 end
 
                 // ------------------------------------------------
-                // ST_OUTPUT: 640ビット時間のHigh出力 (Jamming)
+                // ST_OUTPUT: ビット反転させる
                 // ------------------------------------------------
                 ST_OUTPUT: begin
-                    jam_pin <= 1'b1; // 出力ピンをHighに
+                // ST_OUTPUT: begin
+                //     jam_pin <= 1'b1; // 出力ピンをHighに
 
-                    if (counter == OUT_CYCLES - 1) begin
-                        // 規定時間経過したら終了
-                        state   <= ST_IDLE; // 最初に戻る
-                        jam_pin <= 1'b0;    // 出力をLowに
-                    end else begin
-                        counter <= counter + 1'b1;
-                    end
-                end
+                //     if (counter == OUT_CYCLES - 1) begin
+                //         // 規定時間経過したら終了
+                //         state   <= ST_IDLE; // 最初に戻る
+                //         jam_pin <= 1'b0;    // 出力をLowに
+                //     end else begin
+                //         counter <= counter + 1'b1;
+                //     end
+                // end
             endcase
         end
     end
